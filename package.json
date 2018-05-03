@@ -1,0 +1,23 @@
+{
+  "name": "license-crawler",
+  "version": "0.0.1",
+  "description": "crawls a npm package and it's dependencies for their licenses",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Marcel Winheim",
+    "url": "https://github.com/marcelwinh/"
+  },
+  "bugs": {
+    "url": "https://github.com/marcelwinh/license-crawler/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "9.6.6",
+    "typescript": "2.6.2",
+    "tslint-config-airbnb": "5.7.0",
+    "tslint": "5.9.1"
+  }
+}
