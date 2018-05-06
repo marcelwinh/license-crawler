@@ -146,9 +146,6 @@ function checkDependencies(packageJson, parent, options) {
                     license = license.type;
                 }
                 license = license ? license : 'UNKNOWN';
-                console.log(license);
-                console.log(options.exclude);
-                console.log(options.exclude.indexOf(license));
                 if (options.exclude.indexOf(license) === -1) {
                     var childPackageJson = options.input + 'node_modules/' + npmPackage + '/package.json';
                     var childsParent = parent + '/' + npmPackage;

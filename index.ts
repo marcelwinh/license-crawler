@@ -13,7 +13,15 @@ let alreadyKnownDependencies = {};
 let depth = 0;
 
 
-export function crawlLicenses(args, callback?) {
+export function crawlLicenses(args: {
+  input: string,
+  out: string,
+  production: boolean,             // if true don't check devDependencies
+  statistics: boolean,             // generate statistics
+  exclude: string[],
+  sorted: string,            // 'license' or 'package'
+  format: string,               // 'json' or 'txt'
+},                            callback?) {
   const defaultOptions = {
     input: './',                  // input folder which contains package.json
     out: './reportLicenses.json', // output file
@@ -106,7 +114,7 @@ function checkChilds(childs: any, dept: number): string {
   for (const child in childs) {
     if (childs[child].error === undefined) {
       // tslint:disable-next-line:no-increment-decrement
-      for (let i = 0; i < depth; i++){
+      for (let i = 0; i < depth; i++) {
         tmp += '│  ';
       }
       tmp += '├─' + child + ':\n';
@@ -131,7 +139,7 @@ function checkDependencies(packageJson: string, parent: string, options: {
   exclude: string[],
   sorted: string,            // 'license' or 'package'
   format: string,               // 'json' or 'txt'
-}}): Object {
+}): Object {
   let tmp = {};
   if (fs.existsSync(packageJson)) {
     let dependencies = JSON.parse(fs.readFileSync(packageJson, 'utf8')).dependencies;
@@ -156,9 +164,6 @@ function checkDependencies(packageJson: string, parent: string, options: {
           license = license.type;
         }
         license = license ? license : 'UNKNOWN';
-        console.log(license);
-        console.log(options.exclude);
-        console.log(options.exclude.indexOf(license));
         if (options.exclude.indexOf(license) === -1) {
           const childPackageJson = options.input + 'node_modules/' + npmPackage + '/package.json';
           const childsParent = parent + '/' + npmPackage;
