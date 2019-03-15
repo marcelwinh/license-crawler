@@ -40,6 +40,7 @@ export function crawlLicenses(args: {
     sorted: args.sorted !== undefined ? args.sorted : defaultOptions.sorted,
     format: args.format !== undefined ? args.format : defaultOptions.format,
   };
+  if (options.input[options.input.length] !== '/' || options.input[options.input.length] !== '\\') options.input += '/';
   if (fs.existsSync(options.input + 'package.json')) {
     const name = JSON.parse(fs.readFileSync(options.input + 'package.json', 'utf8')).name;
 
