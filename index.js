@@ -29,6 +29,8 @@ function crawlLicenses(args, callback) {
         sorted: args.sorted !== undefined ? args.sorted : defaultOptions.sorted,
         format: args.format !== undefined ? args.format : defaultOptions.format,
     };
+    if (options.input[options.input.length] !== '/' || options.input[options.input.length] !== '\\')
+        options.input += '/';
     if (fs.existsSync(options.input + 'package.json')) {
         var name_1 = JSON.parse(fs.readFileSync(options.input + 'package.json', 'utf8')).name;
         var dependencies = checkDependencies(options.input + 'package.json', name_1, options);
